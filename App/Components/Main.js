@@ -52,6 +52,9 @@ export var styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center'
     },
+    image: {
+      height: 350,
+    },
 });
 
 export default class Main extends Component {
