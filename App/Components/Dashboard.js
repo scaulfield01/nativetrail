@@ -6,6 +6,9 @@ import {
     StyleSheet,
     TouchableHighlight
 } from 'react-native';
+import Repositories from './Repositories';
+import Profile from './Profile';
+import { api } from '../Utils/api';
 
 
 var styles = StyleSheet.create({
@@ -55,13 +58,28 @@ export default class Dashboard extends Component {
 		return obj
 	}
 	goToRepos(){
-		console.log('go to repos');
+		api.getRepos(this.props.userInfo.login)
+			.then((res)=> {
+				this.props.navigator.push({
+					title:'Repos Page',
+					component: Repositories,
+					passProps: {
+						userInfo: this.props.userInfo,
+						repos: res
+					}
+				});
+			})
 	}
 	goToNotes(){
 		console.log('got to notes');
 	}
 	goToProfile(){
 		console.log('got to profile');
+		this.props.navigator.push({
+			title:'Profile Page',
+			component: Profile,
+			passProps: {userInfo: this.props.userInfo}
+		});
 	}
 
 	render(){
