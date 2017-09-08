@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import Badge from './Badge';
 import Separator from './Helpers/Separator';
+import WebRepoView from  './Helpers/WebRepoView';
 
 var styles = StyleSheet.create({
     container: {
@@ -42,7 +43,12 @@ export default class Repositories extends Component {
     }
 
     openPage(url) {
-        console.log('this url is' + url)
+        debugger
+        this.props.navigator.push({
+            component: WebRepoView,
+            title: 'Web View',
+            passProps: {url}
+        })
     }
 
     render() {
@@ -53,7 +59,7 @@ export default class Repositories extends Component {
                     <View key={index}>
                         <View style={styles.rowContainer}>
                             <TouchableHighlight
-                                onPress={this.openPage(repos[index].html_url)}
+                                onPress={() => this.openPage(repos[index].html_url)}
                                 underLayColor='transparent'
                             >
                                 <Text style={styles.name}>{repos[index].name}</Text>
