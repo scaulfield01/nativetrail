@@ -43,7 +43,6 @@ export default class Repositories extends Component {
     }
 
     openPage(url) {
-        debugger
         this.props.navigator.push({
             component: WebRepoView,
             title: 'Web View',

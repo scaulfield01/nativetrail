@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Repositories from './Repositories';
 import Profile from './Profile';
+import Notes from './Notes';
 import { api } from '../Utils/api';
 
 
@@ -71,17 +72,26 @@ export default class Dashboard extends Component {
 			})
 	}
 	goToNotes(){
-		console.log('got to notes');
+		api.getNotes(this.props.userInfo.login)
+			.then((res) => {
+				res = res || {};
+				this.props.navigator.push({
+					component: Notes,
+					title: 'Notes',
+					passProps: {
+						notes: res,
+						userInfo: this.props.userInfo	
+					}
+				})
+			})
 	}
 	goToProfile(){
-		console.log('got to profile');
 		this.props.navigator.push({
 			title:'Profile Page',
 			component: Profile,
 			passProps: {userInfo: this.props.userInfo}
 		});
 	}
-
 	render(){
 		let buttonTypes = ['Profile','Repos','Notes'];
 		let self = this;
